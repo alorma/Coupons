@@ -16,6 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.alorma.cupons.ui.components.AppBar
 import com.alorma.cupons.ui.theme.CuponsTheme
 import com.google.accompanist.insets.ui.Scaffold
+import kotlin.random.Random
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +34,7 @@ class MainActivity : ComponentActivity() {
                     }
                 ) { contentPadding ->
                     Box(Modifier.padding(contentPadding)) {
-                        Greeting("Android")
+                        Greeting(Random.nextInt(1_000).toString())
                     }
                 }
             }

@@ -7,6 +7,7 @@ import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
+import com.alorma.cupons.ui.debugmodules.ConfigureScreen
 import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
@@ -49,7 +50,8 @@ fun CuponsTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable
                     darkIcons = useDarkIcons,
                 )
             }
-            content()
+
+            ConfigureScreen(content = { content() })
         }
     }
 }
