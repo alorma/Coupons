@@ -31,16 +31,26 @@ class CouponsListViewModel : ViewModel() {
 
     fun refresh() {
         currentPage = 0
-        loadedCoupons = List(2) { item ->
+        loadedCoupons = listOf(
             CouponItemViewModel(
-                id = CouponId("$item"),
-                title = "Por compras superiores a 15€",
+                id = CouponId("0"),
+                message = "Por compras superiores a 15€",
                 startDate = "22/07/2021",
                 expireDate = "20/08/2021",
-                value = "3€",
+                value = "3",
                 type = CouponType.DISCOUNT,
-            )
-        }
+                expanded = false,
+            ),
+            CouponItemViewModel(
+                id = CouponId("1"),
+                message = "Por compras superiores a 15€",
+                startDate = "22/07/2021",
+                expireDate = "20/08/2021",
+                value = "3",
+                type = CouponType.DISCOUNT,
+                expanded = false,
+            ),
+        )
         viewModelScope.launch {
             _isRefreshing.value = true
             loadItems()
