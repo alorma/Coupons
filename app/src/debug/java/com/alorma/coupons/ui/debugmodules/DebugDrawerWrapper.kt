@@ -1,4 +1,4 @@
-package com.alorma.cupons.ui.debugmodules
+package com.alorma.coupons.ui.debugmodules
 
 import androidx.compose.runtime.Composable
 import com.alorma.drawer_base.DebugDrawerLayout

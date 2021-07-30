@@ -1,4 +1,4 @@
-package com.alorma.cupons.ui.debugmodules
+package com.alorma.coupons.ui.debugmodules
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background

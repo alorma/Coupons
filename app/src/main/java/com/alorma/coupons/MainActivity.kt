@@ -1,4 +1,4 @@
-package com.alorma.cupons
+package com.alorma.coupons
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -10,22 +10,24 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.alorma.cupons.ui.components.AppBar
-import com.alorma.cupons.ui.theme.CuponsTheme
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.alorma.coupons.ui.components.AppBar
+import com.alorma.coupons.ui.screen.list.CouponsListScreen
+import com.alorma.coupons.ui.theme.CouponsTheme
 import com.google.accompanist.insets.ui.Scaffold
-import kotlin.random.Random
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
-            CuponsTheme {
+            CouponsTheme {
                 Scaffold(
                     topBar = {
-                        AppBar(title = { Text(text = "Cupons") })
+                        AppBar(title = { Text(text = "Coupons") })
                     },
                     floatingActionButton = {
                         FloatingActionButton(onClick = { /*TODO*/ }) {
@@ -33,24 +35,18 @@ class MainActivity : ComponentActivity() {
                         }
                     }
                 ) { contentPadding ->
-                    Box(Modifier.padding(contentPadding)) {
-                        Greeting(Random.nextInt(1_000).toString())
+                    Box(modifier = Modifier.padding(contentPadding)) {
+                        val navController = rememberNavController()
+
+                        NavHost(
+                            navController = navController,
+                            startDestination = "list",
+                        ) {
+                            composable(route = "list") { CouponsListScreen() }
+                        }
                     }
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    CuponsTheme {
-        Greeting("Android")
     }
 }

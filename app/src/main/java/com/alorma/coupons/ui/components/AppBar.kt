@@ -1,4 +1,4 @@
-package com.alorma.cupons.ui.components
+package com.alorma.coupons.ui.components
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.RowScope

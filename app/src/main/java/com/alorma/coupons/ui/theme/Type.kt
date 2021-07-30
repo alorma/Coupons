@@ -1,4 +1,4 @@
-package com.alorma.cupons.ui.theme
+package com.alorma.coupons.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

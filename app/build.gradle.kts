@@ -7,7 +7,7 @@ android {
     compileSdk = 30
 
     defaultConfig {
-        applicationId = "com.alorma.composedrawer"
+        applicationId = "com.alorma.coupons"
         minSdk = 21
         targetSdk = 30
         versionCode = 1
@@ -57,8 +57,12 @@ dependencies {
     implementation("com.google.accompanist:accompanist-insets:0.15.0")
     implementation("com.google.accompanist:accompanist-insets-ui:0.15.0")
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.15.0")
+    implementation("com.google.accompanist:accompanist-swiperefresh:0.15.0")
 
     implementation("com.github.alorma:drawer-base:0.19.0")
     implementation("com.github.alorma:drawer-modules:0.19.0")
     implementation("com.github.alorma:drawer-ui-modules:0.19.0")
+    implementation("androidx.navigation:navigation-compose:2.4.0-alpha05")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0-alpha02")
+
 }
