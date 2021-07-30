@@ -1,5 +1,6 @@
 package com.alorma.coupons.ui.screen.list
 
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,6 +11,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -17,17 +19,21 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.alorma.coupons.domain.id.toKey
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
+import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun CouponsListScreen(
-    CouponsListViewModel: CouponsListViewModel = viewModel(),
+    couponsListViewModel: CouponsListViewModel = viewModel(),
 ) {
-    val coupons by CouponsListViewModel.content.collectAsState()
-    val isRefreshing by CouponsListViewModel.isRefreshing.collectAsState()
+    val coupons by couponsListViewModel.content.collectAsState()
+    val isRefreshing by couponsListViewModel.isRefreshing.collectAsState()
+
+    val corutinesScope = rememberCoroutineScope()
 
     SwipeRefresh(
         state = rememberSwipeRefreshState(isRefreshing = isRefreshing),
-        onRefresh = { CouponsListViewModel.refresh() },
+        onRefresh = { couponsListViewModel.refresh() },
         clipIndicatorToPadding = false,
     ) {
         if (coupons.isEmpty()) {
@@ -47,9 +53,13 @@ fun CouponsListScreen(
                 ) { coupon ->
                     CouponItem(
                         coupon = coupon,
-                        modifier = Modifier
-                            .padding(start = 8.dp, end = 8.dp, bottom = 8.dp),
+                        modifier = Modifier.padding(start = 8.dp, end = 8.dp, bottom = 8.dp),
                         onClick = {},
+                        onChangeExpandStatus = { coupon, newStatus ->
+                            corutinesScope.launch {
+                                couponsListViewModel.changeStatus(coupon, newStatus)
+                            }
+                        },
                     )
                 }
             }

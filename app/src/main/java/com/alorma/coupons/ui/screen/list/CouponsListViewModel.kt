@@ -47,8 +47,26 @@ class CouponsListViewModel : ViewModel() {
                 startDate = "22/07/2021",
                 expireDate = "20/08/2021",
                 value = "3",
-                type = CouponType.DISCOUNT,
+                type = CouponType.PERCENTAGE,
                 expanded = false,
+            ),
+            CouponItemViewModel(
+                id = CouponId("2"),
+                message = "Por compras superiores a 15€",
+                startDate = "22/07/2021",
+                expireDate = "20/08/2021",
+                value = "3",
+                type = CouponType.DISCOUNT,
+                expanded = true,
+            ),
+            CouponItemViewModel(
+                id = CouponId("3"),
+                message = "Por compras superiores a 15€",
+                startDate = "22/07/2021",
+                expireDate = "20/08/2021",
+                value = "3",
+                type = CouponType.PERCENTAGE,
+                expanded = true,
             ),
         )
         viewModelScope.launch {
@@ -58,8 +76,14 @@ class CouponsListViewModel : ViewModel() {
         }
     }
 
-    companion object {
-        private const val ITEMS_PER_PAGE = 10
+    suspend fun changeStatus(coupon: CouponItemViewModel, newStatus: Boolean) {
+        loadedCoupons = loadedCoupons.map { item ->
+            if (item.id != coupon.id) {
+                item
+            } else {
+                coupon.copy(expanded = newStatus)
+            }
+        }
+        _content.value = loadedCoupons
     }
-
 }
