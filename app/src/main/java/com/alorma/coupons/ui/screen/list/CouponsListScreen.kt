@@ -3,8 +3,9 @@ package com.alorma.coupons.ui.screen.list
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -13,6 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.alorma.coupons.domain.id.toKey
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 
@@ -36,18 +38,23 @@ fun CouponsListScreen(
                 Text(text = "No items")
             }
         } else {
-
             LazyColumn(
-                contentPadding = PaddingValues(bottom = 80.dp),
+                contentPadding = PaddingValues(top = 8.dp, bottom = 80.dp),
             ) {
-                itemsIndexed(
+                items(
                     items = coupons,
-                    key = { index, _ -> "Item #$index" },
-                ) { index, color ->
-                    //ColorItem(color, index)
+                    key = { coupon -> coupon.id.toKey() },
+                ) { coupon ->
+                    CouponItem(
+                        coupon = coupon,
+                        modifier = Modifier
+                            .padding(start = 8.dp, end = 8.dp, bottom = 8.dp),
+                        onClick = {},
+                    )
                 }
             }
         }
     }
 
 }
+

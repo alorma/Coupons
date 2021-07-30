@@ -15,6 +15,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.alorma.coupons.ui.components.AppBar
+import com.alorma.coupons.ui.debugmodules.ConfigureScreen
 import com.alorma.coupons.ui.screen.list.CouponsListScreen
 import com.alorma.coupons.ui.theme.CouponsTheme
 import com.google.accompanist.insets.ui.Scaffold
@@ -24,7 +25,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            CouponsTheme {
+            CouponsTheme() {
                 Scaffold(
                     topBar = {
                         AppBar(title = { Text(text = "Coupons") })
@@ -37,12 +38,13 @@ class MainActivity : ComponentActivity() {
                 ) { contentPadding ->
                     Box(modifier = Modifier.padding(contentPadding)) {
                         val navController = rememberNavController()
-
-                        NavHost(
-                            navController = navController,
-                            startDestination = "list",
-                        ) {
-                            composable(route = "list") { CouponsListScreen() }
+                        ConfigureScreen {
+                            NavHost(
+                                navController = navController,
+                                startDestination = "list",
+                            ) {
+                                composable(route = "list") { CouponsListScreen() }
+                            }
                         }
                     }
                 }

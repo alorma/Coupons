@@ -7,7 +7,6 @@ import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
-import com.alorma.coupons.ui.debugmodules.ConfigureScreen
 import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
@@ -24,7 +23,10 @@ private val LightColorPalette = lightColors(
 )
 
 @Composable
-fun CouponsTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable() () -> Unit) {
+fun CouponsTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    content: @Composable () -> Unit,
+) {
     val colors = if (darkTheme) {
         DarkColorPalette
     } else {
@@ -51,7 +53,7 @@ fun CouponsTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composabl
                 )
             }
 
-            ConfigureScreen(content = { content() })
+            content()
         }
     }
 }

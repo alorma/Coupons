@@ -2,6 +2,7 @@ package com.alorma.coupons.ui.screen.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.alorma.coupons.domain.id.CouponId
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -28,14 +29,18 @@ class CouponsListViewModel : ViewModel() {
         _content.value = loadedCoupons
     }
 
-    fun loadMoreItems() {
-        currentPage += 1
-        viewModelScope.launch { loadItems() }
-    }
-
     fun refresh() {
         currentPage = 0
-        loadedCoupons = emptyList()
+        loadedCoupons = List(2) { item ->
+            CouponItemViewModel(
+                id = CouponId("$item"),
+                title = "Por compras superiores a 15€",
+                startDate = "22/07/2021",
+                expireDate = "20/08/2021",
+                value = "3€",
+                type = CouponType.DISCOUNT,
+            )
+        }
         viewModelScope.launch {
             _isRefreshing.value = true
             loadItems()
