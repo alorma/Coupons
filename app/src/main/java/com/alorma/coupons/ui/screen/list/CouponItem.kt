@@ -30,6 +30,9 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.text
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -138,17 +141,19 @@ internal fun CouponDate(
     modifier: Modifier = Modifier,
     date: String,
     imageVector: ImageVector,
-    contentDescription: String? = null,
+    contentDescription: String,
 ) {
     Row(
-        modifier = modifier,
+        modifier = modifier.semantics(mergeDescendants = true) {
+            text = AnnotatedString("$contentDescription $date")
+        },
         verticalAlignment = Alignment.CenterVertically,
     ) {
         CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.disabled) {
             Icon(
                 modifier = Modifier.size(20.dp),
                 imageVector = imageVector,
-                contentDescription = contentDescription,
+                contentDescription = null,
             )
         }
         Spacer(modifier = Modifier.width(16.dp))
@@ -166,7 +171,9 @@ internal fun CouponItemCollapsed(
             modifier = Modifier.padding(16.dp),
         ) {
             CouponDate(
-                modifier = Modifier.fillMaxWidth().padding(start = 2.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 2.dp),
                 date = coupon.expireDate,
                 imageVector = Icons.Default.CalendarToday,
                 contentDescription = "Expire date",

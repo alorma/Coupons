@@ -41,6 +41,22 @@ android {
         isCheckReleaseBuilds = false
         isAbortOnError = false
     }
+    packagingOptions {
+        resources.excludes.addAll(
+            listOf(
+                "META-INF/DEPENDENCIES",
+                "META-INF/LICENSE",
+                "META-INF/LICENSE.txt",
+                "META-INF/license.txt",
+                "META-INF/NOTICE",
+                "META-INF/NOTICE.txt",
+                "META-INF/notice.txt",
+                "META-INF/ASL2.0",
+                "META-INF/AL2.0",
+                "META-INF/LGPL2.1",
+            )
+        )
+    }
 }
 
 dependencies {
@@ -51,5 +67,6 @@ dependencies {
     implementation(libs.bundles.accompanist)
     implementation(libs.bundles.debugDrawer)
 
-
+    androidTestImplementation(libs.compose.jUnit4)
+    debugImplementation(libs.compose.testManifest)
 }
