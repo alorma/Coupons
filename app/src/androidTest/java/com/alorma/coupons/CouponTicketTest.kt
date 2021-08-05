@@ -5,6 +5,8 @@ import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.onRoot
+import androidx.compose.ui.test.printToLog
 import com.alorma.coupons.domain.id.CouponId
 import com.alorma.coupons.ui.screen.list.CouponItem
 import com.alorma.coupons.ui.screen.list.CouponItemViewModel
@@ -27,10 +29,11 @@ class CouponTicketTest {
             }
         }
 
-        composeTestRule.onNodeWithContentDescription("Start date $START_DATE").assertIsDisplayed()
+        composeTestRule.onRoot(useUnmergedTree = true).printToLog("alorma")
+        composeTestRule.onNodeWithText("Expire date $EXPIRE_DATE").assertIsDisplayed()
         composeTestRule.onNodeWithText(PERCENTAGE_DISCOUNT).assertIsDisplayed()
-        composeTestRule.onNodeWithText(START_DATE).assertIsDisplayed()
-        composeTestRule.onNodeWithText(EXPIRE_DATE).assertDoesNotExist()
+        composeTestRule.onNodeWithText(EXPIRE_DATE).assertIsDisplayed()
+        composeTestRule.onNodeWithText(START_DATE).assertDoesNotExist()
     }
 
     companion object {
@@ -45,7 +48,7 @@ class CouponTicketTest {
             expireDate = EXPIRE_DATE,
             value = "3",
             type = CouponType.PERCENTAGE,
-            expanded = true,
+            expanded = false,
         )
     }
 
