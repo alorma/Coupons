@@ -44,26 +44,12 @@ android {
 }
 
 dependencies {
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
+    coreLibraryDesugaring(libs.android.desugarJdk)
 
-    implementation("androidx.activity:activity-compose:1.3.1")
+    implementation(libs.bundles.compose)
+    implementation(libs.composeRelated.navigation)
+    implementation(libs.bundles.accompanist)
+    implementation(libs.bundles.debugDrawer)
 
-    implementation("androidx.compose.foundation:foundation:1.0.1")
-    implementation("androidx.compose.foundation:foundation-layout:1.0.1")
-    implementation("androidx.compose.ui:ui:1.0.1")
-    implementation("androidx.compose.material:material:1.0.1")
-    implementation("androidx.compose.material:material-icons-extended:1.0.1")
-    implementation("androidx.compose.ui:ui-tooling:1.0.1")
-
-    implementation("com.google.accompanist:accompanist-insets:0.15.0")
-    implementation("com.google.accompanist:accompanist-insets-ui:0.15.0")
-    implementation("com.google.accompanist:accompanist-systemuicontroller:0.15.0")
-    implementation("com.google.accompanist:accompanist-swiperefresh:0.15.0")
-
-    implementation("com.github.alorma:drawer-base:0.20.0")
-    implementation("com.github.alorma:drawer-modules:0.20.0")
-    implementation("com.github.alorma:drawer-ui-modules:0209.0")
-    implementation("androidx.navigation:navigation-compose:2.4.0-alpha05")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0-alpha03")
 
 }
