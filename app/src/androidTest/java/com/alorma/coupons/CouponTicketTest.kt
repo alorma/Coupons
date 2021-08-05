@@ -23,7 +23,7 @@ class CouponTicketTest {
     fun collapsedCouponTicket() {
         composeTestRule.setContent {
             CouponsTheme {
-                CouponItem(coupon = COUPON_PERCENTAGE_COLLAPSED, onClick = { /*TODO*/ })
+                CouponItem(coupon = COUPON_PERCENTAGE_COLLAPSED)
             }
         }
 

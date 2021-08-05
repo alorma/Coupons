@@ -54,13 +54,11 @@ fun CouponsListScreen(
                     CouponItem(
                         coupon = coupon,
                         modifier = Modifier.padding(start = 8.dp, end = 8.dp, bottom = 8.dp),
-                        onClick = {},
-                        onChangeExpandStatus = { coupon, newStatus ->
-                            corutinesScope.launch {
-                                couponsListViewModel.changeStatus(coupon, newStatus)
-                            }
-                        },
-                    )
+                    ) { couponSelected, newStatus ->
+                        corutinesScope.launch {
+                            couponsListViewModel.changeStatus(couponSelected, newStatus)
+                        }
+                    }
                 }
             }
         }

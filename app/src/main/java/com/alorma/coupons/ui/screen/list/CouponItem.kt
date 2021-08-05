@@ -48,7 +48,6 @@ import com.alorma.coupons.ui.theme.CouponsTheme
 fun CouponItem(
     coupon: CouponItemViewModel,
     modifier: Modifier = Modifier,
-    onClick: () -> Unit,
     onChangeExpandStatus: (CouponItemViewModel, Boolean) -> Unit = { _, _ -> },
 ) {
     Card(
@@ -296,7 +295,6 @@ fun CouponItemPreviewLight(
     CouponsTheme(darkTheme = false) {
         CouponItem(
             coupon = coupon,
-            onClick = {},
         )
     }
 }
@@ -310,7 +308,6 @@ fun CouponItemPreviewDark(
     CouponsTheme(darkTheme = true) {
         CouponItem(
             coupon = coupon,
-            onClick = {},
         )
     }
 }
